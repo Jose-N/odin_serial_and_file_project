@@ -1,9 +1,9 @@
 class Hangman
   def initialize()
     @word = ""
-    @tries = ""
-    @wrong = ""
-    @hidden = ""
+    @triesLeft = 6
+    @wrongLetters = ""
+    @hiddenWord = ""
   end
 
   def newWord
@@ -17,32 +17,30 @@ class Hangman
   end
 
   def play
-    hiddenWord = "" 
-    wrongLetters = "" 
-    triesLeft = 6
-    @word.length.times{ hiddenWord << "*" }
-    until triesLeft == 0 || hiddenWord == @word
-      puts "You have " + triesLeft.to_s + " tries left!"
+    @word.length.times{ @hiddenWord << "*" }
+    until @triesLeft == 0 || @hiddenWord == @word
+      puts "You have " + @triesLeft.to_s + " tries left!"
       #puts "Word:" + @word
       #puts @word.length.to_s
-      puts "Hidden word: " + hiddenWord
-      puts "Wrong Letters: " + wrongLetters
+      puts "Hidden word: " + @hiddenWord
+      puts "Wrong Letters: " + @wrongLetters
       puts "Please guess a letter:"  
       guess = gets.chomp.downcase.to_s  
       if @word.include? guess
         @word.each_char.with_index do |letter, index|
           if letter == guess
-            hiddenWord[index] = guess
+            @hiddenWord[index] = guess
           end
         end
       else 
-        triesLeft -= 1
-        wrongLetters << guess + " "
+        @triesLeft -= 1
+        @wrongLetters << guess + " "
       end
     end
-    if triesLeft == 0
+    if @triesLeft == 0
       puts "You Lose!"
-    elsif hiddenWord == @word
+      puts "The correct word was: " + @word
+    elsif @hiddenWord == @word
       puts "You Win!"
     end
   end
