@@ -1,7 +1,9 @@
 class Hangman
   def initialize()
     @word = ""
-    @hangman = ""
+    @tries = ""
+    @wrong = ""
+    @hidden = ""
   end
 
   def newWord
