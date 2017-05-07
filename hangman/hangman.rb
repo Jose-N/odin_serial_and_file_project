@@ -63,20 +63,20 @@ if response == "yes"
   saveFile = gets.chomp.to_s
   saveFileFull = "saves/" + saveFile
   oldGame = YAML.load(File.read(saveFileFull))
-  until hangman.didWin
-    hangman.play
+  until oldGame.didWin
+    oldGame.play
     puts "Would you like to save your game: Yes/No?"
     save = gets.chomp.downcase.to_s
     if save == "yes"
       if Dir.exist?('saves')
         fileName = "saves/savegame" + DateTime.now.to_s + ".txt"
-        File.open(fileName, 'w') { |f| f.write(YAML.dump(hangman))}
+        File.open(fileName, 'w') { |f| f.write(YAML.dump(oldGame))}
         puts "Your game has been saved"
       else
         Dir.mkdir "saves"
         puts "Made a saves folder"
         fileName = "saves/savegame" + DateTime.now.to_s + ".txt"
-        File.open(fileName, 'w') { |f| f.write(YAML.dump(hangman))}
+        File.open(fileName, 'w') { |f| f.write(YAML.dump(oldGame))}
         puts "Your game has been saved"
       end
     end
