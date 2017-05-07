@@ -1,0 +1,5 @@
+--- !ruby/object:Hangman
+word: reasoner
+triesLeft: 6
+wrongLetters: ''
+hiddenWord: ! '*ea***e*'
